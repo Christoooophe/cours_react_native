@@ -1,49 +1,78 @@
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  Image,
+  Modal,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Contact from "./components/Contact";
+import TextModal from "./components/TextModal";
+import { useState } from "react";
+import CourseModal from "./components/CourseModal";
+import AffichageArticle from "./components/AffichageArticle";
 
 const App = () => {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView >
-          <Contact
-            nom={"Todd"}
-            prenom={"Davey"}
-            equipe={"TAS Milwaukee"}
-            moto={"M1000RR"}
-            photo={"https://www.iomtoday.co.im/tindle-static/image/2024/06/08/17/25/DSC_6487.jpg?width=669&height=445&crop=669:445"}
-          />
-          <Contact
-            nom={"Hickman"}
-            prenom={"Peter"}
-            equipe={"FHO Racing"}
-            moto={"M1000RR"}
-            photo={"https://cdn-7.motorsport.com/images/amp/6gpZEBG0/s1000/peter-hickman-superbike-1.jpg"}
-          />
-          <Contact
-            nom={"Harrison"}
-            prenom={"Dean"}
-            equipe={"Honad UK"}
-            moto={"CBR1000RR-R"}
-            photo={"https://cdn-9.motorsport.com/images/amp/6zQKzNLY/s1000/dean-harrison-superbike-tt-202.jpg"}
-          />
-          <Contact
-            nom={"Dunlop"}
-            prenom={"Michael"}
-            equipe={"MD Racing"}
-            moto={"CBR1000RR-R"}
-            photo={"https://www.newsletter.co.uk/webimg/b25lY21zOjYyOTAwZGI2LWQ1ZTYtNDcyMi04NGRlLTZiYmQzMTZlMGMyMTo4ZWM1MjBiNC00NWZjLTRiODYtYWI5Ni01NmY1MWM0YjY2ZGI=.jpg?crop=3:2,smart&width=640&quality=65"}
-          />
-        </ScrollView>
-      </SafeAreaView>
-    )
+  const [visible, setVisible] = useState(false);
+  const [listeCourse, setListeCourse] = useState([]);
+  function closeModal() {
+    setVisible(false)
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.bloc}>
+        {listeCourse.length > 0 ?
+          <View>
+            <Text style={styles.title}>Ma liste de course :</Text>
+            <FlatList data={listeCourse} renderItem={({item}) =>
+              <TouchableOpacity onPress={() => setListeCourse(listeCourse.filter((article) => article !== item))}>
+                <AffichageArticle item={item}/>
+              </TouchableOpacity>}/>
+          </View> :
+          <Text style={styles.title}>Aucun article à afficher</Text>
+        }
+      </View>
+      <View style={styles.blocdeux}>
+        <TouchableOpacity style={styles.button} onPress={() => setVisible(true)}>
+          <Text style={styles.text}>Ajouter</Text>
+        </TouchableOpacity>
+      </View>
+      <CourseModal visible={visible} closeModal={closeModal} articles={listeCourse}/>
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor : "#c3f8fa",
       alignItems: 'center',
       flex: 1,
       justifyContent: 'center'
+    },
+    button : {
+      width : 250,
+      height : 25,
+      backgroundColor : "#00b3ff"
+    },
+    text : {
+      color : "#ffffff",
+      textAlign : "center",
+      fontWeight : "bold"
+    },
+    bloc : {
+      flex : 4,
+    },
+    blocdeux : {
+      flex : 1,
+      margin : 25
+    },
+    title : {
+      fontWeight : "bold",
+      fontSize : 25,
+      textAlign : "center"
     }
   });
 
