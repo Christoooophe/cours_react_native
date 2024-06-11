@@ -14,6 +14,7 @@ const Contact = ({nom, prenom, equipe, moto, photo}) => {
 
 const style = StyleSheet.create({
   container: {
+    marginTop : 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
