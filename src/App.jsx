@@ -53,8 +53,12 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     button : {
+      borderRadius : 5,
+      margin : 10,
+      alignItems : "center",
+      justifyContent : "center",
       width : 250,
-      height : 25,
+      height : 50,
       backgroundColor : "#00b3ff"
     },
     text : {
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
     },
     bloc : {
       flex : 4,
+      marginTop : 25
     },
     blocdeux : {
       flex : 1,

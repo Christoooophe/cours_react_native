@@ -28,24 +28,31 @@ const CourseModal = (props) => {
 const styles = StyleSheet.create({
   modal : {
     flex : 1,
-    alignItems : "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop : 200
   },
   container : {
     flex : 1,
-    display : "flex",
     flexDirection : "row"
   },
   add : {
     width : 125,
-    height : 25,
+    height : 50,
     backgroundColor : "#00b3ff",
-    margin : 10
+    borderRadius : 5,
+    margin : 10,
+    alignItems : "center",
+    justifyContent : "center"
   },
   delete : {
     width : 125,
-    height : 25,
+    height : 50,
     backgroundColor : "#fc190d",
-    margin : 10
+    borderRadius : 5,
+    margin : 10,
+    alignItems : "center",
+    justifyContent : "center"
   },
   text : {
     color : "#ffffff",
