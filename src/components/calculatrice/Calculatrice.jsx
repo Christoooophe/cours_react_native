@@ -11,6 +11,11 @@ const Calculatrice = () => {
     }
     setResult(result + value);
   }
+  function removeLastAdd() {
+    if (result.length > 0) {
+      setResult(result.slice(0, -1))
+    }
+  }
   function getResultOperation() {
     setResult(eval(result).toString());
   }
@@ -22,7 +27,7 @@ const Calculatrice = () => {
       <View style={styles.bloc}>
         <TextInput value={result.toString()} style={styles.resultInput}/>
         <View style={styles.row}>
-          <Text style={styles.greyButton}>AC</Text>
+          <Text style={styles.greyButton} onPress={() => setResult("0")}>AC</Text>
           <Text style={styles.greyButton}>^</Text>
           <Text style={styles.greyButton} onPress={(e) => createOperation('%')}>%</Text>
           <Text style={styles.greyButton} onPress={(e) => createOperation('/')}>/</Text>
@@ -48,7 +53,7 @@ const Calculatrice = () => {
         <View style={styles.row}>
           <Text style={styles.whiteButton} onPress={(e) => createOperation('.')}>.</Text>
           <Text style={styles.whiteButton} onPress={(e) => createOperation(0)}>0</Text>
-          <Text style={styles.whiteButton} onPress={() => setResult("0")}>Del</Text>
+          <Text style={styles.whiteButton} onPress={() => removeLastAdd()}>Del</Text>
           <Text style={styles.greyButton} onPress={() => getResultOperation()}>=</Text>
         </View>
       </View>
